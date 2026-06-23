@@ -1,0 +1,28 @@
+.menu-search-modal .ant-modal-content {
+  padding: 0;
+}
+
+.menu-search-modal .ant-modal-body {
+  padding: 0;
+}
+
+.menu-search-modal__select {
+  width: 100%;
+}
+
+.menu-search-modal__select .ant-select-selector {
+  height: 60px !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  align-items: center !important;
+}
+
+.menu-search-modal__select .ant-select-selection-search-input {
+  height: 58px !important;
+}
+
+.menu-search-modal__select .ant-select-selection-placeholder,
+.menu-search-modal__select .ant-select-selection-item {
+  line-height: 58px !important;
+}

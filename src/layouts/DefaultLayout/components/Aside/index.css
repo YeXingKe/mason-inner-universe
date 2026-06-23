@@ -1,0 +1,70 @@
+.layout-aside {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  margin: var(--app-spacing) 0 var(--app-spacing) var(--app-spacing);
+  height: calc(100% - var(--app-spacing) * 2);
+  background: var(--app-surface);
+  border-radius: 4px;
+  box-shadow: var(--app-shadow);
+  overflow: hidden;
+  transition: width 0.3s ease;
+  flex-shrink: 0;
+}
+
+.layout-aside--collapsed {
+  width: 80px;
+}
+
+.layout-aside__menu {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.layout-aside__menu .ant-menu {
+  width: 100% !important;
+  border-inline-end: none !important;
+  background: transparent;
+}
+
+.layout-aside__menu .ant-menu-inline-collapsed {
+  width: 80px !important;
+}
+
+.layout-aside__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  height: 50px;
+  padding: 0 20px;
+  border-top: 1px solid var(--app-border);
+  background: var(--app-surface);
+}
+
+.layout-aside__toolbar--collapsed {
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0;
+  height: 100px;
+}
+
+.layout-aside__toolbar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--app-text-secondary);
+  transition: all 0.2s;
+}
+
+.layout-aside__toolbar-item:hover {
+  color: var(--app-primary);
+  background: var(--app-primary-muted);
+}

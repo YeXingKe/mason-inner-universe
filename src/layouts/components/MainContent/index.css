@@ -1,0 +1,12 @@
+.layout-main {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.layout-main__scrollbar {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

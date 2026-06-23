@@ -1,0 +1,64 @@
+.nav-tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  margin-right: var(--app-spacing);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  height: 5px;
+}
+
+.nav-tabs__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.7;
+  color: var(--app-text-secondary);
+  transition: opacity 0.2s;
+}
+
+.nav-tabs__item:hover {
+  opacity: 1;
+}
+
+.nav-tabs__item--active {
+  opacity: 1;
+  color: var(--app-text);
+}
+
+.nav-tabs__close {
+  margin-left: 8px;
+  padding: 2px;
+  font-size: 12px;
+  border-radius: 50%;
+}
+
+.nav-tabs__close:hover {
+  background: var(--app-primary-muted);
+  color: var(--app-text-muted);
+}
+
+.nav-tabs__indicator {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 40px;
+  border-radius: 4px;
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow);
+  transition: all 0.2s;
+  pointer-events: none;
+}

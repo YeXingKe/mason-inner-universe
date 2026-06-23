@@ -1,0 +1,74 @@
+.nav-menus {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: auto;
+  background: var(--app-surface);
+  border-radius: 4px;
+  box-shadow: var(--app-shadow);
+}
+
+.nav-menus__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+  color: var(--app-text-secondary);
+  transition: background 0.2s;
+}
+
+.nav-menus__item:hover {
+  background: var(--app-hover);
+}
+
+.nav-menus__profile {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 12px;
+  cursor: pointer;
+  color: var(--app-text-secondary);
+  transition: background 0.2s;
+}
+
+.nav-menus__profile:hover {
+  background: var(--app-hover);
+}
+
+.nav-menus__profile-name {
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.nav-menus__profile-popover {
+  width: 220px;
+}
+
+.nav-menus__profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.nav-menus__profile-name--large {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-menus__profile-time {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--app-text-muted);
+}
+
+.nav-menus__profile-footer {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  border-top: 1px solid var(--app-border);
+}

@@ -1,0 +1,141 @@
+---
+description: React 组件与目录折中规范（共享组件文件夹 / Layout 扁平 / 页面 index 入口）
+globs: src/**/*
+alwaysApply: false
+---
+
+# React 文件结构（折中方案）
+
+## 1. 共享组件 → `src/components/`（文件夹 + 同名文件）
+
+跨页面复用的 UI 组件，每个组件独占文件夹：
+
+```
+src/components/EChartBox/
+├── EChartBox.tsx      # 组件实现，文件名 = 组件名
+└── index.ts           # export { default } from './EChartBox'
+```
+
+对外导入：
+
+```typescript
+import { EChartBox } from '@/components'
+// 或
+import EChartBox from '@/components/EChartBox'
+```
+
+新增共享组件时，在 `src/components/index.ts` 追加导出。
+
+## 2. 布局结构
+
+### 布局入口
+
+```
+src/layouts/
+├── AppLayout/              # 根据 layoutMode 切换布局
+│   └── index.tsx
+├── DefaultLayout/          # 默认布局（侧边栏 + 顶栏标签）
+│   ├── index.tsx
+│   ├── index.css
+│   └── components/Aside/, Header/
+├── StreamlineLayout/       # 单栏布局（顶栏横向菜单，无侧边栏）
+│   ├── index.tsx
+│   ├── index.css
+│   └── components/Header/
+├── components/             # 多布局共享组件
+│   ├── Logo/
+│   ├── NavMenus/
+│   ├── NavTabs/
+│   ├── MainContent/
+│   ├── MenuSearchModal/
+│   └── LayoutConfigDrawer/
+├── hooks/useLayoutTabs.ts
+└── utils/buildMenuProps.ts
+```
+
+路由使用 `AppLayout`；`layoutMode` 在 `LayoutConfigContext` 中配置，可在布局配置抽屉切换。
+
+### 布局私有组件
+
+各布局独有的组件放在对应 `components/` 下，每个组件独占文件夹，`index.tsx` + `index.css` 配对：
+
+```
+src/layouts/DefaultLayout/components/
+├── Aside/
+│   ├── index.tsx
+│   └── index.css
+├── Header/
+│   ├── index.tsx
+│   └── index.css
+```
+
+导入：`import Aside from './components/Aside'`（解析到 `Aside/index.tsx`）。
+
+共享组件从 `@/layouts/components/` 引用：`import Logo from '@/layouts/components/Logo'`。
+
+## 3. 页面 → 固定 `index.tsx` 入口
+
+```
+src/pages/Dashboard/
+├── index.tsx           # 页面入口（路由 import '@/pages/Dashboard'）
+├── index.css           # 与 index.tsx 同名配对
+├── components/         # 页面私有组件：单文件即可，不强制子文件夹
+│   └── StatPanel.tsx
+├── hooks/
+├── constants/
+└── utils/
+```
+
+页面私有组件：简单时用 `components/StatPanel.tsx`；复杂时再建 `components/StatPanel/StatPanel.tsx`。
+
+## 4. 不要用 index.tsx 当共享组件实现
+
+| 场景 | 入口文件 |
+|------|----------|
+| 页面 / 布局壳 | `index.tsx` |
+| 共享组件 | `ComponentName.tsx` + `index.ts` 导出 |
+| Layout 私有组件 | `ComponentName.tsx`（扁平） |
+
+## 5. 路径别名
+
+统一使用 `@/` 引用 `src/` 下模块，避免 `../../` 跨层相对路径。
+
+## 6. CSS 文件命名（与 React 官方 co-location 一致）
+
+样式文件必须与引用它的 TS/TSX **同名配对**（同目录、同 basename）：
+
+| 场景 | TS/TSX | CSS |
+|------|--------|-----|
+| 页面 / 布局入口 | `index.tsx` | `index.css` |
+| 布局子组件 | `Aside/index.tsx` | `Aside/index.css` |
+| 共享组件（有样式时） | `EChartBox.tsx` | `EChartBox.css` |
+| 全局样式 | — | `styles/global.css` |
+| 设计变量 | — | `styles/tokens.css` |
+
+规则：
+
+- 禁止 `Dashboard.css` 配 `index.tsx` 这类 **basename 不一致** 的写法
+- 禁止 `login.css` 小写、禁止 `variables.css` 等含义模糊的全局命名
+- 新增组件样式时优先 `ComponentName.module.css`（CSS Modules，Vite 官方推荐）；当前项目暂用 plain CSS + 同名配对
+- 样式 import 写在对应 TSX 顶部：`import './index.css'` / `import './Aside.css'`
+
+## 7. CSS 类名（BEM + 设计变量）
+
+### 设计变量（`styles/tokens.css`）
+
+使用 `--app-*` 前缀，禁止 BuildAdmin 遗留的 `--ba-*`：
+
+| 变量 | 含义 |
+|------|------|
+| `--app-spacing` | 页面间距 |
+| `--app-bg` / `--app-surface` | 背景 / 卡片表面 |
+| `--app-text` / `--app-text-muted` | 主文字 / 次要文字 |
+| `--app-primary` | 主题色 |
+
+### 类名规则
+
+- **Block__element--modifier**（BEM），block 名与组件/页面一致
+- 页面容器：`.page`（全局），页面 block：`.dashboard`、`.login`、`.layout`
+- 禁止：`suspension`、`default-main`、`ba-*`、无 block 前缀的泛化名（`.title`、`.btn`、`.content`）
+- 布局组件已用 BEM：`layout-aside__menu`、`nav-tabs__item--active`
+- 响应式修饰符：`dashboard__col--stack`（替代 `lg-mb-20` 等 utility 类名）

@@ -1,0 +1,31 @@
+.layout-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  height: 50px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--app-border);
+  overflow: hidden;
+}
+
+.layout-logo--collapsed {
+  justify-content: center;
+  padding: 10px;
+}
+
+.layout-logo__img {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+}
+
+.layout-logo__name {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--app-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

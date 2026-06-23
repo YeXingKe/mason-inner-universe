@@ -1,0 +1,8 @@
+.layout-header {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 50px;
+  margin: 20px var(--app-spacing) 0;
+  min-width: 0;
+}

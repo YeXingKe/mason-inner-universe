@@ -12,6 +12,20 @@ dist
 dist-ssr
 *.local
 
+# Frontend (web/)
+web/node_modules
+web/dist
+
+# Backend (server/)
+server/bin/
+server/storage/
+server/.env
+
+# Go
+*.exe
+*.test
+*.out
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +36,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vite

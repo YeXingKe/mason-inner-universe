@@ -1,6 +1,6 @@
 ---
 description: React 组件与目录折中规范（共享组件文件夹 / Layout 扁平 / 页面 index 入口）
-globs: src/**/*
+globs: web/src/**/*
 alwaysApply: false
 ---
 

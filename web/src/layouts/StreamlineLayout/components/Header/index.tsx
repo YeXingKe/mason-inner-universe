@@ -27,7 +27,14 @@ export default function Header({ activePath, onMenuClick }: HeaderProps) {
         <Logo collapsed={false} />
       </div>
       <div className="streamline-header__menu">
-        <Menu mode="horizontal" selectedKeys={[activePath]} items={menuItems} onClick={handleMenuClick} />
+        <Menu
+          mode="horizontal"
+          selectedKeys={[activePath]}
+          items={menuItems}
+          onClick={handleMenuClick}
+          subMenuOpenDelay={0.15}
+          subMenuCloseDelay={0.25}
+        />
       </div>
       <NavMenus />
     </header>

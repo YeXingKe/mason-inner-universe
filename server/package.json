@@ -1,0 +1,9 @@
+{
+  "name": "@miu/server",
+  "private": true,
+  "scripts": {
+    "dev": "go run ./cmd/api",
+    "build": "go build -o bin/api.exe ./cmd/api",
+    "start": "go run ./cmd/api"
+  }
+}
